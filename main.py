@@ -48,13 +48,13 @@ def print_vm_info(vm, depth=1, max_depth=10):
         "Network #4": vm.network[3].name if summary.config.numEthernetCards >3 else None,
         "Num Monitors": videoCard.numDisplays,
         "Video Ram KB": videoCard.videoRamSizeInKB,
-        "Resource pool": vm.resourcePool.config.name
+        #"Resource pool": vm.resourcePool.config.memoryAllocation
     }
     print(vm_info)
 
 def get_videoCard(vm):
     for device in vm.config.hardware.device:
-        if (type(device).__name__ == "vim.vm.device.VirtualVideoCard"):
+        if (type(device).__name__ == "vim.vm.device.scaleDescendantsShares"):
             return device
     return None
 
