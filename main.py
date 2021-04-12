@@ -48,7 +48,7 @@ def print_vm_info(vm, depth=1, max_depth=10):
         #"Network #4": vm.network[3].name,
 
     }
-    print(vm_info)    
+    print(vm_info)
     
 try:
     service_instance = connect.SmartConnectNoSSL(host=cfg.credentials["host"],
