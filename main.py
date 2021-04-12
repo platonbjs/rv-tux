@@ -45,11 +45,17 @@ def print_vm_info(vm, depth=1, max_depth=10):
         "Network #1": vm.network[0].name if summary.config.numEthernetCards >0 else None,
         "Network #2": vm.network[1].name if summary.config.numEthernetCards >1 else None,
         "Network #3": vm.network[2].name if summary.config.numEthernetCards >2 else None,
-        "Network #4": vm.network[3].name if summary.config.numEthernetCards >3 else None
-
+        "Network #4": vm.network[3].name if summary.config.numEthernetCards >3 else None,
+        "Num Monitors": get_num_monitors(vm)
     }
     print(vm_info)
-    
+
+def get_num_monitors(vm):
+    for device in vm.config.hardware.device:
+        if (type(device).__name__ == "vim.vm.device.VirtualVideoCard"):
+            return device.numDisplays
+    return None
+
 try:
     service_instance = connect.SmartConnectNoSSL(host=cfg.credentials["host"],
                                                 user=cfg.credentials["user"],
