@@ -36,11 +36,11 @@ def print_vm_info(vm, depth=1, max_depth=10):
         "Suspend time": summary.runtime.suspendTime,
         "Change Version": vm.config.changeVersion,
         "CPUs": summary.config.numCpu,
-    #    "Latency Sensivity": vm.config.latencySensitivity.level
+        "Latency Sensivity": None if vm.config.latencySensitivity is None else vm.config.latencySensitivity.level,
         "Memory": summary.config.memorySizeMB,
         "NICs": summary.config.numEthernetCards,
         "Disks": summary.config.numVirtualDisks,
-        #"EnableUUID": 
+        "EnableUUID": vm.config.flags.diskUuidEnabled,
         "CBT": vm.config.changeTrackingEnabled,
         "Network #1": vm.network[0].name,
         #"Network #2": vm.network[1].name,
@@ -48,7 +48,7 @@ def print_vm_info(vm, depth=1, max_depth=10):
         #"Network #4": vm.network[3].name,
 
     }
-    print(vm_info)
+    print(vm_info)    
     
 try:
     service_instance = connect.SmartConnectNoSSL(host=cfg.credentials["host"],
