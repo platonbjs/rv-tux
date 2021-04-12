@@ -20,7 +20,7 @@ def print_vm_info(vm, depth=1, max_depth=10):
         for c in vmList:
             print_vm_info(c, depth + 1)
         return
-
+    videoCard = get_videoCard(vm)
     summary = vm.summary
     vm_info = {
         "VM": summary.config.name,
@@ -46,14 +46,15 @@ def print_vm_info(vm, depth=1, max_depth=10):
         "Network #2": vm.network[1].name if summary.config.numEthernetCards >1 else None,
         "Network #3": vm.network[2].name if summary.config.numEthernetCards >2 else None,
         "Network #4": vm.network[3].name if summary.config.numEthernetCards >3 else None,
-        "Num Monitors": get_num_monitors(vm)
+        "Num Monitors": videoCard.numDisplays,
+        "Video Ram KB": videoCard.videoRamSizeInKB
     }
     print(vm_info)
 
-def get_num_monitors(vm):
+def get_videoCard(vm):
     for device in vm.config.hardware.device:
         if (type(device).__name__ == "vim.vm.device.VirtualVideoCard"):
-            return device.numDisplays
+            return device
     return None
 
 try:
