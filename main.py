@@ -47,7 +47,8 @@ def print_vm_info(vm, depth=1, max_depth=10):
         "Network #3": vm.network[2].name if summary.config.numEthernetCards >2 else None,
         "Network #4": vm.network[3].name if summary.config.numEthernetCards >3 else None,
         "Num Monitors": videoCard.numDisplays,
-        "Video Ram KB": videoCard.videoRamSizeInKB
+        "Video Ram KB": videoCard.videoRamSizeInKB,
+        "Resource pool": vm.resourcePool.config.name
     }
     print(vm_info)
 
