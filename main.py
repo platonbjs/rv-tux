@@ -42,10 +42,10 @@ def print_vm_info(vm, depth=1, max_depth=10):
         "Disks": summary.config.numVirtualDisks,
         "EnableUUID": vm.config.flags.diskUuidEnabled,
         "CBT": vm.config.changeTrackingEnabled,
-        "Network #1": vm.network[0].name,
-        #"Network #2": vm.network[1].name,
-        #"Network #3": vm.network[2].name,
-        #"Network #4": vm.network[3].name,
+        "Network #1": vm.network[0].name if summary.config.numEthernetCards >0 else None,
+        "Network #2": vm.network[1].name if summary.config.numEthernetCards >1 else None,
+        "Network #3": vm.network[2].name if summary.config.numEthernetCards >2 else None,
+        "Network #4": vm.network[3].name if summary.config.numEthernetCards >3 else None
 
     }
     print(vm_info)
